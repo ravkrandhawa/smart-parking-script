@@ -1,0 +1,7 @@
+I built an automation script using Python and Selenium to automatically purchase my daily parking from the SMRTPass website. It logs in using saved credentials, enters my CVV, and either clicks the purchase button or submits the form directly as a fallback.
+
+I used WebDriverWait with expected conditions to ensure all elements were loaded before interacting with them, which helped avoid timing issues. I stored sensitive information like email, password, and CVV in a .env file and loaded them securely with python-dotenv.
+
+One of the main challenges was that the login form appeared in a modal with an overlay that blocked interaction. I solved this by removing the overlay using JavaScript. Another issue was that the form fields and buttons sometimes weren’t interactable due to how the page was structured — we resolved that by scoping element lookups inside the modal only, and adding a .submit() fallback in case clicking failed.
+
+I opted to schedule the script using cron at 8:00 AM on weekdays since I’m already working at that time, and it avoids having to leave a Python process running like I would with the schedule module. I also added logging and screenshot debugging during development, but cleaned up the script for production.
